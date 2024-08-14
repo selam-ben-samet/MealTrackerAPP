@@ -1,0 +1,20 @@
+﻿@model MealTrackerAPP.Models.MealEditViewModel
+
+<div class="container">
+    <h2>Yemek Düzenle</h2>
+    <form asp-action="EditMeal" method="post">
+        <div class="form-group">
+            <label for="Name">Yemek Adı</label>
+            <input type="text" class="form-control" id="Name" name="Name" value="@Model.Name" required />
+        </div>
+        <div class="form-group">
+            <label for="PortionSize">Porsiyon Boyutu</label>
+            <input type="text" class="form-control" id="PortionSize" name="PortionSize" value="@Model.PortionSize" required />
+        </div>
+        <div class="form-group">
+            <label for="Datetime">Tarih ve Saat</label>
+            <input type="datetime-local" class="form-control" id="Datetime" name="Datetime" value="@Model.Datetime?.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </form>
+</div>

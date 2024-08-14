@@ -1,0 +1,22 @@
+﻿@model MealTrackerAPP.Models.PhysicalActivityEditViewModel
+
+<div class="container">
+    <h2>Fiziksel Aktiviteyi Düzenle</h2>
+    <form asp-action="EditActivity" method="post">
+        <div class="form-group">
+            <label for="ActivityType">Aktivite Türü</label>
+            <input type="text" class="form-control" id="ActivityType" name="ActivityType" value="@Model.ActivityType"
+                required />
+        </div>
+        <div class="form-group">
+            <label for="Duration">Süre</label>
+            <input type="text" class="form-control" id="Duration" name="Duration" value="@Model.Duration" required />
+        </div>
+        <div class="form-group">
+            <label for="Datetime">Tarih ve Saat</label>
+            <input type="datetime-local" class="form-control" id="Datetime" name="Datetime"
+                value="@Model.Datetime?.ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </form>
+</div>

@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealTracker - Kayıt Ekranı</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+            }
+
+        .form-section {
+            display: none;
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .form-section.active {
+                display: block;
+            }
+    </style>
+</head>
+<body>
+    <h1 class="text-center mb-4">MealTracker</h1>
+
+    <div class="card-container">
+        <div class="card text-center p-3" style="width: 18rem;" id="mealCard">
+            <div class="card-body">
+                <h5 class="card-title">Yemek</h5>
+                <p class="card-text">Yemeklerinizi kaydedin.</p>
+            </div>
+        </div>
+        <div class="card text-center p-3" style="width: 18rem;" id="waterCard">
+            <div class="card-body">
+                <h5 class="card-title">Su</h5>
+                <p class="card-text">Günlük su tüketiminizi takip edin.</p>
+            </div>
+        </div>
+        <div class="card text-center p-3" style="width: 18rem;" id="activityCard">
+            <div class="card-body">
+                <h5 class="card-title">Fiziksel Aktivite</h5>
+                <p class="card-text">Yaptığınız aktiviteleri kaydedin.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section" id="mealForm">
+        <h4>Yemek Bilgisi Girin</h4>
+        <form id="mealFormElement" method="post" action="/Tracker/SaveMeal">
+            <div class="form-group">
+                <label for="mealName">Yemek Adı</label>
+                <input type="text" class="form-control" id="mealName" name="mealName" placeholder="Yemek adını girin">
+            </div>
+            <div class="form-group">
+                <label for="mealPortion">Porsiyon Boyutu</label>
+                <input type="text" class="form-control" id="mealPortion" name="mealPortion" placeholder="Porsiyon boyutunu girin">
+            </div>
+            <div class="form-group">
+                <label for="mealDateTime">Tarih ve Saat</label>
+                <input type="datetime-local" class="form-control" id="mealDateTime" name="mealDateTime">
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+
+    <div class="form-section" id="waterForm">
+        <h4>Su Tüketimi Girin</h4>
+        <form id="waterFormElement" method="post" action="/Tracker/SaveWater">
+            <div class="form-group">
+                <label for="waterAmount">Miktar (ml)</label>
+                <input type="number" class="form-control" id="waterAmount" name="waterAmount" placeholder="Miktarı girin">
+            </div>
+            <div class="form-group">
+                <label for="waterDateTime">Tarih ve Saat</label>
+                <input type="datetime-local" class="form-control" id="waterDateTime" name="waterDateTime">
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+
+    <div class="form-section" id="activityForm">
+        <h4>Fiziksel Aktivite Girin</h4>
+        <form id="activityFormElement" method="post" action="/Tracker/SaveActivity">
+            <div class="form-group">
+                <label for="activityType">Aktivite Türü</label>
+                <input type="text" class="form-control" id="activityType" name="activityType" placeholder="Aktivite türünü girin">
+            </div>
+            <div class="form-group">
+                <label for="activityDuration">Süre (dakika)</label>
+                <input type="number" class="form-control" id="activityDuration" name="activityDuration" placeholder="Süreyi girin">
+            </div>
+            <div class="form-group">
+                <label for="activityDateTime">Tarih ve Saat</label>
+                <input type="datetime-local" class="form-control" id="activityDateTime" name="activityDateTime">
+            </div>
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('mealCard').addEventListener('click', function () {
+            setActiveForm('mealForm');
+        });
+
+        document.getElementById('waterCard').addEventListener('click', function () {
+            setActiveForm('waterForm');
+        });
+
+        document.getElementById('activityCard').addEventListener('click', function () {
+            setActiveForm('activityForm');
+        });
+
+        function setActiveForm(formId) {
+            // Tüm form-seksiyonu gizle
+            document.querySelectorAll('.form-section').forEach(function (section) {
+                section.classList.remove('active');
+            });
+
+            // İlgili form-seksiyonunu göster
+            document.getElementById(formId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

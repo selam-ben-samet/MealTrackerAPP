@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Anasayfa";
+}
+
+<div class="container mt-5">
+    <div class="jumbotron text-center bg-light p-5 rounded shadow">
+        <h1 class="display-4">Kişisel Yemek Takip Uygulamanıza Hoş Geldiniz</h1>
+        <p class="lead mt-4">Günlük yediğiniz yemekleri, su tüketiminizi ve fiziksel aktivitelerinizi takip etmek artık çok kolay. Yemek Takip uygulamamız, diyetisyeninizle diyetinizi etkili bir şekilde takip etmenizi sağlar, kağıt ve kalemle uğraşmanıza gerek kalmaz.</p>
+        <hr class="my-4">
+        <p>Yemek Takip Uygulamamızı Neden Kullanmalısınız?</p>
+        <ul class="text-start">
+            <li>Yediğiniz yemekleri saat, tarih ve porsiyon boyutuyla kaydedin.</li>
+            <li>Günlük su tüketiminizi takip edin, sağlıklı kalın.</li>
+            <li>Yaptığınız spor aktivitelerini kaydedin ve ilerlemenizi izleyin.</li>
+            <li>Diyetisyeninizin önerilerini daha kolay takip edebilmek için beslenme alışkanlıklarınızı kapsamlı bir şekilde gözlemleyin.</li>
+        </ul>
+
+        
+
+        @if (Context.Session.GetString("Username") == null)
+        {
+            <p class="mt-4">Diyetinize ve sağlığınıza hakim olmaya hazır mısınız? Bir hesap oluşturun ve hemen takip etmeye başlayın!</p>
+            <a class="btn btn-primary btn-lg mt-3" asp-area="" asp-controller="Account" asp-action="Register">Hesap Oluştur</a>
+            <a class="btn btn-secondary btn-lg mt-3" asp-area="" asp-controller="Account" asp-action="Login">Zaten hesabınız var mı? Giriş Yapın</a>
+
+        }
+        
+        
+    </div>
+</div>

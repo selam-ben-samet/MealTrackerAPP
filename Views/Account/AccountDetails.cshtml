@@ -1,0 +1,25 @@
+﻿@model MealTrackerAPP.Models.User
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Hesap Bilgileriniz</h2>
+                    <p><strong>Kullanıcı Adı:</strong> @Model.Username</p>
+                    <!-- Diğer hesap detayları burada olabilir -->
+                    <div class="d-grid mt-4">
+                        <form asp-action="Logout" method="post">
+                            <button type="submit" class="btn btn-danger">Çıkış Yap</button>
+                        </form>
+                    </div>
+                    <div class="d-grid mt-2">
+                        <form asp-action="DeleteAccount" method="post">
+                            <button type="submit" class="btn btn-warning">Hesabı Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

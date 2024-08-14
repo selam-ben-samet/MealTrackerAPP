@@ -1,0 +1,177 @@
+﻿@model MealTrackerAPP.ViewModels.RecordsViewModel
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealTracker - Kayıtlarım</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #007bff;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed; /* Tablo hücrelerinin genişliklerini sabitler */
+            border-collapse: collapse; /* Hücrelerin kenarlarını birleştirir */
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd; /* Hücre kenarlarını belirginleştirir */
+            word-wrap: break-word; /* Uzun metinleri kırar */
+        }
+
+        th {
+            
+            color: #007bff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="text-center mb-4">Kayıtlarım</h1>
+
+    <!-- Yemek Kayıtları -->
+    <h2>Yemek Kayıtları</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Yemek Adı</th>
+                <th>Porsiyon Boyutu</th>
+                <th>Tarih ve Saat</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="mealRecords">
+            @if (Model.Meals.Any())
+            {
+                @foreach (var meal in Model.Meals)
+                {
+                    <tr>
+                        <td>@meal.Name</td>
+                        <td>@meal.PortionSize</td>
+                        <td>@meal.Datetime.ToString()</td>
+                        <td>
+                            <a asp-action="EditMeal" asp-route-id="@meal.Id" class="btn btn-primary btn-sm">Güncelle</a>
+                            <form asp-action="DeleteMeal" method="post" style="display:inline;" onsubmit="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">
+                                <input type="hidden" name="id" value="@meal.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="no-records">Kayıt bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Su Kayıtları -->
+    <h2>Su Kayıtları</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Miktar</th>
+                <th>Ölçek</th>
+                <th>Tarih ve Saat</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="waterRecords">
+            @if (Model.WaterIntakes.Any())
+            {
+                @foreach (var water in Model.WaterIntakes)
+                {
+                    <tr>
+                        <td>@water.Amount</td>
+                        <td>mililitre</td>
+                        <td>@water.Datetime.ToString()</td>
+                        
+                        <td>
+                            <a asp-action="EditWater" asp-route-id="@water.Id" class="btn btn-primary btn-sm">Güncelle</a>
+                            <form asp-action="DeleteMeal" method="post" style="display:inline;" onsubmit="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">
+                                <input type="hidden" name="id" value="@water.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="no-records">Kayıt bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Fiziksel Aktivite Kayıtları -->
+    <h2>Fiziksel Aktivite Kayıtları</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Aktivite Türü</th>
+                <th>Süre</th>
+                <th>Tarih ve Saat</th>
+                <th>İşlemler</th>
+            </tr>
+        </thead>
+        <tbody id="activityRecords">
+            @if (Model.PhysicalActivities.Any())
+            {
+                @foreach (var activity in Model.PhysicalActivities)
+                {
+                    <tr>
+                        <td>@activity.ActivityType</td>
+                        <td>@activity.Duration</td>
+                        <td>@activity.Datetime.ToString()</td>
+                        <td>
+                            <a asp-action="EditActivity" asp-route-id="@activity.Id" class="btn btn-primary btn-sm">Güncelle</a>
+                            <form asp-action="DeleteActivity" method="post" style="display:inline;" onsubmit="return confirm('Bu kaydı silmek istediğinize emin misiniz?');">
+                                <input type="hidden" name="id" value="@activity.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </td>
+
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" class="no-records">Kayıt bulunamadı.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
